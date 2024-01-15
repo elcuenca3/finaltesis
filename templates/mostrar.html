@@ -1,0 +1,89 @@
+{% extends 'base.html' %} {% load static %} {% block contenido %}
+<body>
+    <div class="container">
+        <h1 class="mt-4">Mostrar Preguntas y Respuestas</h1>
+
+        <form method="post" id="formPregunta" class="mt-4">
+            {% csrf_token %}
+            <h2 id="pregunta">{{ preguntas.0.texto }}</h2>
+            {% for respuesta in respuestas %}
+                {% if respuesta.pregunta == preguntas.0 %}
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="respuesta" value="{{ respuesta.pk }}" id="respuesta{{ respuesta.pk }}">
+                        <label class="form-check-label" for="respuesta{{ respuesta.pk }}">{{ respuesta.texto }}</label>
+                    </div>
+                {% endif %}
+            {% endfor %}
+            <button type="submit" class="btn btn-primary mt-3">Siguiente</button>
+        </form>
+        <form method="POST" class="form" onsubmit="return checkForm(this);">
+            {% csrf_token %}
+            <input type="hidden" name="pregunta_pk" value="{{ pregunta.pk }}" />
+  
+            {% for opciones in pregunta.opciones.all %}
+              <div class="form-check mx-4">
+                <input class="form-check-input" type="radio" name="respuesta_pk" value="{{ opciones.pk }}" id="choice-{{ forloop.counter }}" />
+                <label class="form-check-label" for="choice-{{ forloop.counter }}">{{ opciones.texto }}</label>
+              </div>
+            {% endfor %}
+            <button name="myButton" type="submit" class="btn btn-success">Comprobar respuesta</button>
+          </form>
+    </div>
+    <script>
+        $(document).ready(function () {
+          $('#btnSubmit').click(function alert_jqueryconfirm() {
+            bandera = true
+            $.ajax({
+              type: 'GET',
+              url: '/jugar',
+              data: {
+                bandera: bandera
+              }
+            })
+            $.alert({
+              title: 'La respuesta es:',
+              content: '{{ correcta }}'
+            })
+          })
+        })
+        var checkForm = function (form) {
+          form.myButton.disabled = true
+          return true
+        }
+      </script>
+
+</body>
+{% endblock %}
+
+    {% comment %} <p id="timer">Tiempo restante: 1:00</p>
+    <script>
+        // Función para redirigir a la página de inicio después de 1 minuto
+        function redirectHome() {
+            window.location.href = "{% url 'inicio' %}";
+        }
+
+        // Función de contador de tiempo
+        function startTimer(duration, display) {
+            var timer = duration, minutes, seconds;
+            setInterval(function () {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                display.textContent = "Tiempo restante: " + minutes + ":" + seconds;
+
+                if (--timer < 0) {
+                    timer = 0;
+                    redirectHome(); // Redirigir a la página de inicio cuando se agote el tiempo
+                }
+            }, 1000);
+        }
+
+        window.onload = function () {
+            var duration = 5, // Duración del contador en segundos
+                display = document.getElementById('timer');
+            startTimer(duration, display);
+        };
+    </script> {% endcomment %}

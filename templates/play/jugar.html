@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block contenido %}
+  {% if array >= 15 %}
+    <div class="container">
+      <div class="jumbotron my-4">
+        <h2>Ya haz completado con Exito tu cuestionario. ¡Felicidades! revisa como dondo click al siguiente boton</h2>
+        {% comment %} <p>Valor del array: {{ array }}</p> {% endcomment %}
+        <a href="{% url 'tablero' %}">Ver Aqui</a>
+      </div>
+    </div>
+  {% else %}
+    <div class="container espaciojuego">
+      <div id="advertencia" class="alert alert-warning p-3">
+        <strong>Importante:</strong> No salgas de esta pantalla hasta responder todas las preguntas.<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+          <button onclick="ocultarAdvertencia()" class="btn btn-warning"><i class="fa-regular fa-eye"></i> Ocultar</button>
+        </div>
+      </div>
+      <div class="d-inline-flex p-2 btn-outline-primary">
+        <div id="timer"></div>
+      </div>
+      <div class="jumbotron my-4">
+        {% comment %} <p>Valor del array: {{ array }}</p> {% endcomment %}
+
+        <h4 class="alert alert-primary" role="alert">Pregunta {{ n_pregunta }} de 15</h4>
+        <h3 class="p-4">{{ pregunta.texto }}</h3>
+
+        <div class="demo">
+          <input class="btn btn-secondary" id="btnSubmit" type="submit" value="Necesito ayuda" />
+          <br /> <br />
+        </div>
+
+        <script>
+          $(document).ready(function () {
+            $('#btnSubmit').click(function alert_jqueryconfirm() {
+              bandera = true
+              $.ajax({
+                type: 'GET',
+                url: '/jugar',
+                data: {
+                  bandera: bandera
+                }
+              })
+              $.alert({
+                title: 'La respuesta es:',
+                content: '{{ correcta }}'
+              })
+            })
+          })
+          var checkForm = function (form) {
+            form.myButton.disabled = true
+            return true
+          }
+          function ocultarAdvertencia() {
+            var advertenciaDiv = document.getElementById('advertencia')
+            advertenciaDiv.classList.add('hidden')
+          }
+        </script>
+        <form method="POST" class="form" onsubmit="return checkForm(this);">
+          {% csrf_token %}
+          <input type="hidden" name="pregunta_pk" value="{{ pregunta.pk }}" />
+
+          {% for opciones in pregunta.opciones.all %}
+            <div class="form-check mx-4">
+              <input class="form-check-input" type="radio" name="respuesta_pk" value="{{ opciones.pk }}" id="choice-{{ forloop.counter }}" />
+              <label class="form-check-label" for="choice-{{ forloop.counter }}">{{ opciones.texto }}</label>
+            </div>
+          {% endfor %}
+          <div class="p-3">
+            <button name="myButton" type="submit" class="btn btn-success">Comprobar respuesta</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <style>
+      .count {
+        position: fixed;
+        padding-left: 33px;
+        padding-top: 22px;
+      }
+      .hidden {
+        display: none !important;
+      }
+    </style>
+  {% endif %}
+{% endblock %}

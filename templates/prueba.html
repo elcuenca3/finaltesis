@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Tabla de Preguntas</title>
+</head>
+<body>
+    <h1>Tabla de Preguntas Filtradas</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Texto</th>
+                <th>Dificultad</th>
+                <!-- Agrega más encabezados de columnas según tu diccionario -->
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Recorriendo el diccionario para mostrar los datos en la tabla -->
+            {% for pregunta in preguntas_filtradas %}
+                <tr>
+                    <td>{{ pregunta.pk}}</td>
+                    <td>{{ pregunta.fields.texto }}</td>
+                    <td>{{ pregunta.fields.dificultad }}</td>
+                    <!-- Agrega más celdas según la estructura de tu diccionario -->
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

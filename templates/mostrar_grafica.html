@@ -1,0 +1,67 @@
+{% extends 'base.html' %} {% load static %} {% block contenido %}
+  <body>
+    <h1>Gráficos informativos </h1>
+    <div class="container py-3">
+      <div class="jumbotron jumbotron-fluid">
+        <div class="row">
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-sm-6">
+            <div class="container">
+
+                <h2 class="container text-center">Cuestionarios realizados</h2>
+                <p class="lead py-5 text-center text-xxl"style="font-size: 1.8em;" >Grafica en tiempo real de usuarios usando el aplicativo web.</p>
+                {% comment %} <p class="lead" id="impor">¡Descubre cómo podemos ayudarte a tener éxito!</p> {% endcomment %}
+            </div>
+          </div>
+          <canvas id="miGraficaPastel" width="450" height="440"></canvas>
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-sm-6"></div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+        var datos = {{ datos_grafica_pastel|safe }};
+        var nombre_cuestionarios = {
+            1: 'Cuestionario Fundamentos de hardware',
+            2: 'Cuestionario Fundamentos de ',
+            3: 'Cuestionario Metodología de la Investigación y Técnicas de Estudio',
+            // Agrega más nombres según sea necesario
+        };
+        var labels = datos.map(function(numero) {
+            return nombre_cuestionarios[numero];
+        });
+        // Contar la cantidad de veces que aparece cada etiqueta
+        var counts = {};
+        datos.forEach(function(x) { counts[x] = (counts[x] || 0) + 1; });
+
+        var ctx = document.getElementById('miGraficaPastel').getContext('2d');
+        var miGrafica = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'totalCuestionario',
+                    data: Object.values(counts),
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.5)',
+                        'rgba(54, 162, 235, 0.5)',
+                        'rgba(255, 206, 86, 0.5)',
+                        // Añade más colores si tienes más etiquetas
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        // Añade más colores si tienes más etiquetas
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: false, // Evita que la gráfica se ajuste al tamaño del contenedor
+                maintainAspectRatio: false, // Evita mantener la relación de aspecto
+                // Configura las opciones adicionales del gráfico si es necesario
+            }
+        });
+    </script>
+  </body>
+{% endblock %}

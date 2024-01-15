@@ -1,0 +1,35 @@
+{% extends 'base.html' %} {% load static %} {% block contenido %}
+  <body>
+    <div class="container espaciomate">
+      <div class="jumbotron my-4">
+        <h1>La materia de {{ materia.nombre }}</h1>
+        {% if materia.ciclo == 1 %}
+          <p>Es para estudiantes de primer ciclo</p>
+        {% elif materia.ciclo == 2 %}
+          <p>Es para estudiantes de segundo ciclo</p>
+        {% elif materia.ciclo == 3 %}
+          <p>Es para estudiantes de tercer ciclo</p>
+        {% elif materia.ciclo == 4 %}
+          <p>Es para estudiantes de cuarto ciclo</p>
+        {% elif materia.ciclo == 5 %}
+          <p>Es para estudiantes de quinto ciclo</p>
+        {% elif materia.ciclo == 6 %}
+          <p>Es para estudiantes de sexto ciclo</p>
+        {% elif materia.ciclo == 7 %}
+          <p>Es para estudiantes de séptimo ciclo</p>
+        {% elif materia.ciclo == 8 %}
+          <p>Es para estudiantes de octavo ciclo</p>
+        {% elif materia.ciclo == 9 %}
+          <p>Es para estudiantes de noveno ciclo</p>
+        {% else %}
+          <p>Información general sobre la materia.</p>
+        {% endif %}
+        <div>
+          <span>para realizar el Test puedes hacer click aqui</span>
+
+          <a href="/registro"  type="button" class="btn btn-success">Registro</a>
+        </div>
+      </div>
+    </div>
+  </body>
+{% endblock %}

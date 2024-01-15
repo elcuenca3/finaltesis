@@ -1,0 +1,20 @@
+{% extends 'base.html' %} {% load static %} {% block contenido %}
+  <div class="container py-5">
+    <body>
+      <h1>Lista de Carreras</h1>
+      <div class="row">
+        {% for carrera in carreras %}
+          <div class="col-sm-6 mb-3 mb-sm-0">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Carrera de {{ carrera.nombre }}</h5>
+                <p class="card-text">Carrera de la UTPL.</p>
+                <a class="btn btn-primary" href="{% url 'lista_materias' carrera.idCarrera %}">{{ carrera.nombre }}</a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </body>
+  </div>
+{% endblock %}

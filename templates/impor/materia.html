@@ -1,0 +1,40 @@
+{% extends 'base.html' %} {% load static %} {% block contenido %}
+
+<body>
+  <div class="espacio1"> 
+    <div class="container py-4">
+  <h1 class="py-3">Materias disponibles</h1>
+    <div class="row">
+      {% for materia in materias %}
+      <div class="col-sm-6 mb-3 mb-sm-0">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{ materia.nombre }}</h5>
+            <p class="card-text">Ciclo: {{ materia.ciclo }}</p>
+            <a
+              href="{% url 'detalles_materia' materia.idMateria %}"
+              class="btn btn-primary materia"
+              id="materia"
+              value="{{materia.nombre}}"
+            >
+              INICIAR
+            </a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+  <script>
+    var botones = document.querySelectorAll(".materia");
+    botones.forEach(function (boton) {
+      boton.addEventListener("click", function () {
+        var valorBoton = this.value; // Obtener el valor del botón
+        console.log("Valor del botón:", valorBoton);
+      });
+    });
+  </script>
+</body>
+{% endblock %}

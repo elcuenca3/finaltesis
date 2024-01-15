@@ -1,0 +1,24 @@
+{% extends 'base.html' %} {% load static %} {% block contenido %}
+  <body>
+    <div class="container espacior">
+      <div class="container py-4">
+        <div class="jumbotron bgbase">
+          <div class="row text">
+            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+              <h1>Registro</h1>
+              <form method="POST" class="form">
+                {% csrf_token %}
+                <input name="nombre_estudiante" />
+
+                <a href="{% url 'jugar' %}"><button class="btn btn-success">Iniciar</button></a>
+                <p>En caso de encontrar errores envia un correo con tus comentarios a:</p>
+                <p>elcuenca3@utpl.edu.ec</p>
+              </form>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 bgbase"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+{% endblock %}

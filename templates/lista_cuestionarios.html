@@ -1,0 +1,21 @@
+{% extends 'base.html' %} {% load static %} {% block contenido %}
+  <div class="container py-5">
+    <body>
+      <h1>Lista de Cuestionarios</h1>
+      <div class="row">
+        {% for cuestionario in cuestionarios %}
+          <div class="col-sm-6 mb-3 mb-sm-0">
+            <div class="card">
+              <div class="card-body m-4">
+                <h5 class="card-title">Nombre: {{ cuestionario.nombre }}</h5>
+                <p class="card-text lh-sm">Este cuestionario te ayudar a praticar y reforzar tus conocimientos.</p>
+                {% comment %} <a class="btn btn-primary" href="{% url 'mostrar' cuestionario.idCuestionario %}">{{ cuestionario.nombre }}</a> {% endcomment %}
+                <a class="btn btn-primary" href="{% url 'lista_preguntas' cuestionario.idCuestionario %}">{{ cuestionario.nombre }}</a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </body>
+  </div>
+{% endblock %}

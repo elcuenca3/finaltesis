@@ -1,0 +1,55 @@
+{% extends 'base.html' %} {% load static %} {% block contenido %}
+  <body>
+    <div class="espacioinicio">
+      {% if request.user.is_authenticated %}
+        <div class="container py-4">
+          <div class="jumbotron bgbase">
+            <div class="row text">
+              <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-sm-6">
+                <div class="row">
+                  <div class="col-sm-11">
+                    <img src="/static/admin/img/bienvenido.png" alt="Logo" width="390" height="85" id="logo" class="img-fluid" />
+                  </div>
+                  <div class="col-sm-1"></div>
+                </div>
+                <br />
+                <br />
+                <br />
+                <br />
+                <p class="lead py-5">Listo para poner en practica tus conocimientos y aprender de una manera mas didactica {{ user.username|upper }} {{user.last_name}}.</p>
+                <a class="btn btn-primary btn-lg" href="/mostrar_graficas" role="button">Graficos del sistema</a>
+              </div>
+              
+              <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-sm-6">
+                <img class="container-fluid" src="/static/admin/img/robotlog.png" alt="Logo" width="115" height="440" id="center" class="rounded"/>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% else %}
+        <div class="container py-4">
+          <div class="jumbotron bgbase">
+            <div class="row text">
+              <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-sm-6">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <img src="/static/admin/img/bienvenido.png" alt="Logo" width="390" height="85" id="logo" class="img-fluid" />
+                  </div>
+                </div>
+                <br />
+                <br />
+                <br />
+                <p class="lead py-5">Aprende de manera efectiva y personalizada con nuestra inteligencia artificial. Obtén retroalimentación instantánea, resuelve tus dudas y avanza en tu educación.</p>
+                <p class="lead" id="impor">¡Descubre cómo podemos ayudarte a tener éxito!</p>
+                <hr class="my-4" />
+              </div>
+              <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-sm-6 bgbase">
+                <img class="container-fluid" src="/static/admin/img/robotlog.png" class="img-fluid" alt="Logo" width="450" height="440" id="center" />
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </body>
+{% endblock %}

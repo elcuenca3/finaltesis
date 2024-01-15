@@ -1,0 +1,21 @@
+{% extends 'base.html' %} {% load static %} {% block contenido %}
+  <div class="container py-5">
+    <body>
+      <h1>Lista de Materias</h1>
+
+      <div class="row">
+        {% for materia in materias %}
+          <div class="col-sm-6 mb-3 mb-sm-0">
+            <div class="card py-3">
+              <div class="card-body m-3 p-3">
+                <h5 class="card-title">Carrera de {{ materia.nombre }}</h5>
+                <p class="card-text">Carrera de la UTPL.</p>
+                <a class="btn btn-primary" href="{% url 'lista_cuestionarios' materia.idMateria %}">{{ materia.nombre }}</a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </body>
+  </div>
+{% endblock %}

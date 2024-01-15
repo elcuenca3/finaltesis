@@ -1,0 +1,63 @@
+{% extends 'base.html' %} {% load static %} {% block contenido %}
+  <div class="container py-5">
+    <body>
+
+      <div class="container py-5">
+        {% for pregunta in cuestionarios|slice:":1"  %}
+        <div class="col-sm-6 mb-3 mb-sm-0">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Preparado para juagar ?</h5>
+                <p class="card-text lh-sm">Este cuestionario te ayudar a praticar y reforzar tus conocimientos.</p>
+                <div class="d-grid gap-2 col-6 mx-auto">
+                  <a href="{% url 'jugar' pregunta.cuestionario_id_id %}" class="btn btn-success pl-5 pr-5">Jugar</a>
+                </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      {% comment %} <div class="card-deck">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Tiempo: 10 minutos</h5>
+            <p class="card-text">Seleccionar esta opción asignará 10 minutos.</p>
+            <form method="post" action="{% url 'jugar' 1%}?tiempo=600">
+              {% csrf_token %}
+              <input type="hidden" id="tiempoInput" name="tiempo" value="" />
+              <button type="submit" class="btn btn-primary">Usar 10 minutos</button>
+            </form>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Tiempo: 15 minutos</h5>
+            <p class="card-text">Seleccionar esta opción asignará 15 minutos.</p>
+            <form method="post" action="{% url 'jugar' %}?tiempo=900">
+              {% csrf_token %}
+              <input type="hidden" id="tiempoInput" name="tiempo" value="" />
+              <button type="submit" class="btn btn-primary">Usar 15 minutos</button>
+            </form>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Tiempo: 20 minutos</h5>
+            <p class="card-text">Seleccionar esta opción asignará 20 minutos.</p>
+            <form method="post" action="{% url 'jugar' %}?tiempo=1200">
+              {% csrf_token %}
+              <input type="hidden" id="tiempoInput" name="tiempo" value="" />
+              <button type="submit" class="btn btn-primary">Usar 20 minutos</button>
+            </form>
+          </div>
+        </div> {% endcomment %}
+      </div>
+      <script>
+        function setTiempo(tiempoSeleccionado) {
+          document.getElementById('tiempoInput').value = tiempoSeleccionado
+          document.getElementById('tiempoForm').submit()
+        }
+      </script>
+    </body>
+    {% comment %} <a href="{% url 'prueba' %}">prueba</a> {% endcomment %}
+  </div>
+{% endblock %}
