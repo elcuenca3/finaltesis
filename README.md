@@ -1,6 +1,4 @@
-TIC_TutorInteligente
+iMetorEdu  
 
-Autores:
-
-- Luis Fernando Quizhpe Espinosa
-- Brandon Gustavo Vega Soto
+Autor:
+- Erick Leonardo Cuenca Cañar
