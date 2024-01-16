@@ -27,7 +27,7 @@ SECRET_KEY = '^adwke-#3oll)1@5wu-%p=d4%i_6vuo+hg@8(kgvoyubpn(*jc'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['brandonvs.pythonanywhere.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['iMetorEdu.pythonanywhere.com']
 
 
 # Application definition
